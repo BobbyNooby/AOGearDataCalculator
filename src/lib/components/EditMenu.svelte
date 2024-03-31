@@ -305,6 +305,16 @@
 					item.validModifiers.push(modifier);
 				}
 			}
+		} else if (['Ship'].includes(itemData.mainType)) {
+			item.subType = itemData.subType;
+			item.gemNo = itemData.gemNo;
+			item.statsPerLevel = statsTable.getData();
+			item.validModifiers = [];
+			for (const modifier in statsTable.validModifiers) {
+				if (statsTable.validModifiers[modifier] == true) {
+					item.validModifiers.push(modifier);
+				}
+			}
 		} else {
 			for (const statKey in statsTable.getData()) {
 				item[statKey] = statsTable.getData()[statKey];
