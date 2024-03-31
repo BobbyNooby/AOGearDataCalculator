@@ -194,7 +194,7 @@
 			},
 			Ship: {
 				levelVisibility: false,
-				subTypes: false,
+				subTypes: ['Rowboat', 'Sailboat', 'Caravel', 'Ketch', 'Brig'],
 				gemVisibility: false,
 				modifiable: false,
 				isShip: true
