@@ -36,6 +36,30 @@
 			'warding',
 			'drawback'
 		],
+		enchant: [
+			'powerIncrement',
+			'defenseIncrement',
+			'agilityIncrement',
+			'attackSpeedIncrement',
+			'attackSizeIncrement',
+			'intensityIncrement',
+			'regenerationIncrement',
+			'piercingIncrement',
+			'resistanceIncrement',
+
+			'insanity',
+			'warding',
+			'drawback',
+
+			'durability',
+			'magicStorage',
+			'ramDefense',
+			'ramStrength',
+			'resilience',
+			'speed',
+			'stability',
+			'turning'
+		],
 		ship: [
 			'durability',
 			'magicStorage',
@@ -55,6 +79,7 @@
 				subTypes: string[] | boolean;
 				gemVisibility: boolean;
 				modifiable: boolean;
+				isShip: boolean;
 			};
 		};
 	} = {
@@ -80,28 +105,107 @@
 					'Strength'
 				],
 				gemVisibility: true,
-				modifiable: true
+				modifiable: true,
+				isShip: false
 			},
 			Chestplate: {
 				levelVisibility: true,
 				subTypes: ['None', 'Magic', 'Strength'],
 				gemVisibility: true,
-				modifiable: true
+				modifiable: true,
+				isShip: false
 			},
 			Pants: {
 				levelVisibility: true,
 				subTypes: ['None', 'Magic', 'Strength'],
 				gemVisibility: true,
-				modifiable: true
+				modifiable: true,
+				isShip: false
 			},
 			Gem: {
 				levelVisibility: false,
 				subTypes: false,
 				gemVisibility: false,
-				modifiable: false
+				modifiable: false,
+				isShip: false
 			},
-			Enchant: { levelVisibility: false, subTypes: false, gemVisibility: false, modifiable: false },
-			Modifier: { levelVisibility: false, subTypes: false, gemVisibility: false, modifiable: false }
+			Enchant: {
+				levelVisibility: false,
+				subTypes: false,
+				gemVisibility: false,
+				modifiable: false,
+				isShip: true
+			},
+			Modifier: {
+				levelVisibility: false,
+				subTypes: false,
+				gemVisibility: false,
+				modifiable: false,
+				isShip: false
+			},
+			Cannon: {
+				levelVisibility: false,
+				subTypes: false,
+				gemVisibility: false,
+				modifiable: false,
+				isShip: true
+			},
+			Deckhand: {
+				levelVisibility: false,
+				subTypes: false,
+				gemVisibility: false,
+				modifiable: false,
+				isShip: true
+			},
+			'Hull Armor': {
+				levelVisibility: false,
+				subTypes: false,
+				gemVisibility: false,
+				modifiable: false,
+				isShip: true
+			},
+			Quartermaster: {
+				levelVisibility: false,
+				subTypes: false,
+				gemVisibility: false,
+				modifiable: false,
+				isShip: true
+			},
+			Ram: {
+				levelVisibility: false,
+				subTypes: false,
+				gemVisibility: false,
+				modifiable: false,
+				isShip: true
+			},
+			'Sail Material': {
+				levelVisibility: false,
+				subTypes: false,
+				gemVisibility: false,
+				modifiable: false,
+				isShip: true
+			},
+			'Ship Crew': {
+				levelVisibility: false,
+				subTypes: false,
+				gemVisibility: false,
+				modifiable: false,
+				isShip: true
+			},
+			Ship: {
+				levelVisibility: false,
+				subTypes: false,
+				gemVisibility: false,
+				modifiable: false,
+				isShip: true
+			},
+			'Siege Weapons': {
+				levelVisibility: false,
+				subTypes: false,
+				gemVisibility: false,
+				modifiable: false,
+				isShip: true
+			}
 		}
 	};
 	const fallbackImage: string =
@@ -151,8 +255,10 @@
 		itemData.subType = tableSettings.mainType[itemData.mainType].subTypes[0];
 		if (['Accessory', 'Chestplate', 'Pants', 'Gem'].includes(itemData.mainType)) {
 			validCategories = mainTypeStats.gearStatic;
-		} else if (['Enchant', 'Modifier'].includes(itemData.mainType)) {
+		} else if (['Modifier'].includes(itemData.mainType)) {
 			validCategories = mainTypeStats.gearIncrement;
+		} else if (['Enchant'].includes(itemData.mainType)) {
+			validCategories = mainTypeStats.enchant;
 		} else {
 			validCategories = mainTypeStats.ship;
 		}
@@ -178,6 +284,7 @@
 	}
 	// Function to handle changes in itemData
 
+	// Console.logs json
 	function generateEntry() {
 		let item: Partial<anyItem> = {
 			id: itemData.id,
@@ -204,6 +311,7 @@
 			}
 		}
 
+		// Size of data in bytes
 		console.log(item, new Blob([JSON.stringify(item)]).size);
 	}
 
