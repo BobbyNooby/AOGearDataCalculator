@@ -119,7 +119,7 @@
 		mainType: 'Accessory',
 		subType: 'None',
 		rarity: 'None',
-		imageId: htmlImageId,
+		imageId: '',
 		gemNo: 0,
 		statsPerLevel: [],
 		validModifiers: []
